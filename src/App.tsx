@@ -3,10 +3,16 @@ import './App.css'
 import { UUID } from './interfaces/interfaces';
 import Item from './components/Item';
 import { useItem } from './hooks/useItem';
+import { useSeo } from './hooks/useSeo';
 
 function App() {
 
   const { items, addItems, removeItems} = useItem();
+
+  useSeo({
+    title: `[${items}] News item`,
+    description: 'List of Items'
+  })
 
   const handleSubmit = ( evt: FormEvent<HTMLFormElement> ) => {
     evt.preventDefault();
@@ -32,7 +38,7 @@ function App() {
     <h1>Test React-Typescript</h1>
     <main>
       <aside>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} aria-label="Add new Item">
           <label>
             <input type="text" name="item" placeholder='add Item' />
           </label>
